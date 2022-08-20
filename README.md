@@ -28,10 +28,12 @@ This starter includes a ReactJS application with Nest backend. Features:
 
 ### How to use this starter kit?
 
-First clone the repository or download it:
+First clone the repository, cd into it and install dependencies:
 
 ```
 git clone https://github.com/ozgurrgul/ReactNestStarter.git
+cd ReactNestStarter
+yarn
 ```
 
 Then run using following commands:
