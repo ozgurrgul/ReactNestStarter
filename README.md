@@ -55,6 +55,12 @@ server:start
 
 Server runs on http://127.0.0.1:3002 by default
 
+The `webapp` and `server` shared the `dtos` project in order to reduce code duplication. When you make a change to `dtos` package, you need to run:
+
+```
+yarn dto:compile
+```
+
 Execute commands from the main directory
 
 ### Images

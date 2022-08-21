@@ -1,0 +1,14 @@
+{
+  "name": "@rns/dtos",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "class-validator": "^0.13.2",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "compile": "tsc -p tsconfig.json"
+  }
+}

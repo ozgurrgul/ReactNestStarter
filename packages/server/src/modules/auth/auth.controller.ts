@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ok } from '../../utils/httpUtils';
 import { AuthService } from './auth.service';
-import { LoginInput, RegisterInput } from './models/inputs';
+import { LoginInput, RegisterInput } from '@rns/dtos';
 
 @Controller({
   path: 'auth',
