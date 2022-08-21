@@ -34,6 +34,7 @@ First clone the repository, cd into it and install dependencies:
 git clone https://github.com/ozgurrgul/ReactNestStarter.git
 cd ReactNestStarter
 yarn
+lerna bootstrap # will install dependencies in each package
 ```
 
 Then run using following commands:

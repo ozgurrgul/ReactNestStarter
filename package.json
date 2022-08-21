@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "web:start": "cd packages/webapp && yarn start",
-    "server:start": "cd packages/server && yarn start"
+    "server:start": "cd packages/server && yarn start:dev"
   },
   "devDependencies": {
     "lerna": "^5.1.4"

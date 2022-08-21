@@ -1,10 +1,10 @@
-import { PageHeader, Button, Popconfirm } from "antd";
+import { PageHeader, Button, Popconfirm, Spin } from "antd";
 import { useDispatch } from "react-redux";
 import { useMe } from "../../hooks/useMe";
 import { logout } from "../../slices/authSlice";
 
 export const Header = () => {
-  const { me } = useMe();
+  const { me, isLoading } = useMe();
   const dispatch = useDispatch();
   const onConfirmLogout = () => {
     dispatch(logout());
@@ -18,7 +18,7 @@ export const Header = () => {
       subTitle=""
       extra={[
         <Popconfirm key="1" title="Are you sure?" onConfirm={onConfirmLogout}>
-          <Button>Logout {me?.email}</Button>
+          <Button>Logout {isLoading ? <Spin /> : me?.email}</Button>
         </Popconfirm>,
       ]}
     ></PageHeader>

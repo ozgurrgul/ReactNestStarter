@@ -1,17 +1,13 @@
-import { Spin } from "antd";
 import React from "react";
 import { Header } from "../components/shared/Header";
-import { useMe } from "../hooks/useMe";
+import { useGetMeQuery } from "../services/api";
 
 type Props = {
   children?: React.ReactNode;
 };
 
 export const LoggedInLayout: React.FC<Props> = ({ children }) => {
-  const { isLoading } = useMe();
-  if (isLoading) {
-    return <Spin size="large" />;
-  }
+  useGetMeQuery(null);
   return (
     <div
       style={{
