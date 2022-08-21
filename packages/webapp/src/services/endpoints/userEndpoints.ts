@@ -1,6 +1,6 @@
 import { EndpointBuilder } from "@reduxjs/toolkit/dist/query/endpointDefinitions";
 import { BaseOutput } from "../../types/BaseOutput";
-import { User } from "../interfaces/User";
+import { User } from "@rns/prisma";
 
 export const userEndpoints = (
   builder: EndpointBuilder<ReturnType<any>, string, "api">

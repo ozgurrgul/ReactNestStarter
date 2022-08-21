@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "rns",
   "private": true,
   "scripts": {
     "web:start": "cd packages/webapp && yarn start",
@@ -7,5 +7,8 @@
   },
   "devDependencies": {
     "lerna": "^5.1.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.2.1"
   }
 }

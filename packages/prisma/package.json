@@ -1,0 +1,13 @@
+{
+  "name": "@rns/prisma",
+  "version": "1.0.0",
+  "main": "node_modules/.prisma/client/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^4.2.1",
+    "prisma": "^4.2.1"
+  },
+  "scripts": {
+    "prisma:migrate": "prisma migrate dev"
+  }
+}
