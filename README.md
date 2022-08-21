@@ -19,7 +19,7 @@ This starter includes a ReactJS application with Nest backend. Features:
 - [Antd](https://github.com/ant-design/ant-design) / [Antd Pro components](https://procomponents.ant.design/en-US/components/) used for UI
 - Directory: - packages/webapp
 
-#### A React js application for backend
+#### A Nest js application for backend
 - [Nestjs](https://nestjs.com/) for server used
 - [Prisma](https://www.prisma.io/) for ORM used
 - Sqlite for database used
@@ -55,13 +55,13 @@ server:start
 
 Server runs on http://127.0.0.1:3002 by default
 
-The `webapp` and `server` shared the `dtos` project in order to reduce code duplication. When you make a change to `dtos` package, you need to run:
+⚠️ The `webapp` and `server` shared the `dtos` project in order to reduce code duplication. When you make a change to `dtos` package, you need to run:
 
 ```
 yarn dto:compile
 ```
 
-Execute commands from the main directory
+*Execute all commands from the main directory*
 
 ### Images
 
