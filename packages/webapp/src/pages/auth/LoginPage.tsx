@@ -117,10 +117,12 @@ export const LoginPage: React.FC = () => {
             Forgot password
           </a> */}
         </div>
-        <ReCaptcha
-          ref={captchaRef}
-          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-        />
+        <Space>
+          <ReCaptcha
+            ref={captchaRef}
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+          />
+        </Space>
       </LoginFormPage>
     </div>
   );

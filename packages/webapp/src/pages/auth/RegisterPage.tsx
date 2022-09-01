@@ -115,10 +115,12 @@ export const RegisterPage: React.FC = () => {
             },
           ]}
         />
-        <ReCaptcha
-          ref={captchaRef}
-          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-        />
+        <Space>
+          <ReCaptcha
+            ref={captchaRef}
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+          />
+        </Space>
       </LoginFormPage>
     </div>
   );
