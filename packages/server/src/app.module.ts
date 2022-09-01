@@ -6,6 +6,9 @@ import { PrismaService } from './services/prisma.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { UserModule } from './modules/user/user.module';
+import { ConfigModule } from '@nestjs/config';
+
+ConfigModule.forRoot();
 
 @Module({
   imports: [AuthModule, UserModule],

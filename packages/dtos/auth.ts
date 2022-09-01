@@ -6,6 +6,9 @@ export class LoginInput {
 
   @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
+  recaptcha_token: string;
 }
 
 export class RegisterInput {
@@ -14,6 +17,9 @@ export class RegisterInput {
 
   @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
+  recaptcha_token: string;
 
   fullName?: string;
 }

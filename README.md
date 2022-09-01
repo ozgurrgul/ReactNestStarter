@@ -63,6 +63,28 @@ yarn dto:compile
 
 *Execute all commands from the main directory*
 
+### Environment
+
+/packages/server/.env:
+
+```
+RECAPTCHA_SECRET_KEY=
+```
+
+/packages/webapp/.env
+
+```
+VITE_API_URL=http://localhost:3002 # url of running server
+VITE_RECAPTCHA_SITE_KEY=
+```
+
+/packages/prisma/.env
+
+```
+DATABASE_URL="file:./dev.db"
+```
+
+
 ### Images
 
 - Login screen ![Login screen](https://github.com/ozgurrgul/ReactNestStarter/blob/main/images/1.png?raw=true)

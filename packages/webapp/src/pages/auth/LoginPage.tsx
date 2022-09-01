@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ReCaptcha from "react-google-recaptcha";
 import { api, useLoginMutation } from "../../services/api";
 import { setToken } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
@@ -9,16 +10,13 @@ import {
   LockOutlined,
   RightCircleOutlined,
 } from "@ant-design/icons";
-import {
-  ProFormText,
-  ProFormCheckbox,
-  LoginFormPage,
-} from "@ant-design/pro-components";
+import { ProFormText, LoginFormPage } from "@ant-design/pro-components";
 import { Space } from "antd";
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const captchaRef = useRef<ReCaptcha>(null);
 
   const [login, { isLoading, error }] = useLoginMutation();
 
@@ -26,7 +24,18 @@ export const LoginPage: React.FC = () => {
     if (isLoading) {
       return;
     }
-    const loginOutput = await login(formState).unwrap();
+    if (!captchaRef.current) {
+      return;
+    }
+    const token = captchaRef.current.getValue();
+    if (!token) {
+      return;
+    }
+    const loginOutput = await login({
+      email: formState.email,
+      password: formState.password,
+      recaptcha_token: token,
+    }).unwrap();
     dispatch(setToken(loginOutput.data));
     dispatch(api.util.resetApiState());
     navigate("/");
@@ -108,6 +117,10 @@ export const LoginPage: React.FC = () => {
             Forgot password
           </a> */}
         </div>
+        <ReCaptcha
+          ref={captchaRef}
+          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+        />
       </LoginFormPage>
     </div>
   );
