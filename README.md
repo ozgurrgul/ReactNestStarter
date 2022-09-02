@@ -69,6 +69,8 @@ yarn dto:compile
 
 ```
 RECAPTCHA_SECRET_KEY=
+EMAIL_VERIFICATION_TOKEN_SECRET=
+WEBAPP_URL=http://127.0.0.1:5173
 ```
 
 /packages/webapp/.env

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { authEndpoints } from "./endpoints/authEndpoints";
+import { emailEndpoints } from "./endpoints/emailEndpoints";
 import { API_URL } from "../constants";
 import { selectAuthToken } from "../slices/authSlice";
 import { userEndpoints } from "./endpoints/userEndpoints";
@@ -24,7 +25,14 @@ export const api = createApi({
   endpoints: (builder) => ({
     ...authEndpoints(builder),
     ...userEndpoints(builder),
+    ...emailEndpoints(builder),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useGetMeQuery } = api;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGetMeQuery,
+  useVerifyEmailMutation,
+  useResendVerificationMutation,
+} = api;

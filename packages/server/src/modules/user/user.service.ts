@@ -7,7 +7,7 @@ import { RegisterInput } from '@rns/dtos';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async user(
+  async findUser(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User | null> {
     return this.prisma.user.findUnique({
@@ -15,10 +15,14 @@ export class UserService {
     });
   }
 
-  async createUser({ email, password, fullName }: RegisterInput) {
+  async createUser({
+    email,
+    password,
+    fullName,
+  }: RegisterInput): Promise<User | null> {
     try {
-      await this.prisma.user.create({
-        data: { email, password, fullName },
+      return await this.prisma.user.create({
+        data: { email, password, fullName, emailVerified: false },
       });
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {

@@ -7,11 +7,18 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { CommunicationModule } from './modules/communication/communication.module';
+import { EmailVerificationModule } from './modules/email-verification/email-verification.module';
 
 ConfigModule.forRoot();
 
 @Module({
-  imports: [AuthModule, UserModule],
+  imports: [
+    AuthModule,
+    UserModule,
+    CommunicationModule,
+    EmailVerificationModule,
+  ],
   controllers: [AppController],
   providers: [
     {

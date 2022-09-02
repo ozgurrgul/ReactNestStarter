@@ -8,6 +8,7 @@ import { RegisterPage } from "./pages/auth/RegisterPage";
 import { HomePage } from "./pages/HomePage";
 import { TestPage } from "./pages/TestPage";
 import { LoggedInLayout } from "./layout/LoggedInLayout";
+import { VerifyPage } from "./pages/email/VerifyPage";
 
 const auth = (component: React.ReactElement) => (
   <RequireAuth>
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/test" element={auth(<TestPage />)} />
         <Route path="/login" element={anon(<LoginPage />)} />
         <Route path="/register" element={anon(<RegisterPage />)} />
+        <Route path="/email/verify" element={<VerifyPage />} />
       </Route>
     </Routes>
   );

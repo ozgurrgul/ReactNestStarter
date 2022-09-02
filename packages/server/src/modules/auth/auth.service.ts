@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/modules/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { LoginInput, RegisterInput } from '@rns/dtos';
+import { EmailVerificationService } from '../email-verification/email-verification.service';
 
 @Injectable()
 export class AuthService {
@@ -11,10 +12,11 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private emailVerificationService: EmailVerificationService,
   ) {}
 
   async login(body: LoginInput) {
-    const user = await this.userService.user({
+    const user = await this.userService.findUser({
       email: body.email,
     });
     if (user) {
@@ -23,12 +25,10 @@ export class AuthService {
         user.password,
       );
       if (isValidPassword) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password, ...rest } = user;
         this.logger.log(
           `Credentials are matched, signing jwt for user ${user.email}`,
         );
-        return this.jwtService.sign(rest);
+        return this.jwtService.sign({ id: user.id, email: user.email });
       }
     }
 
@@ -39,12 +39,15 @@ export class AuthService {
 
   async register(body: RegisterInput) {
     const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(body.password, salt);
-    await this.userService.createUser({
+    const user = await this.userService.createUser({
       ...body,
-      password,
+      password: await bcrypt.hash(body.password, salt),
     });
     this.logger.log(`User registered successfully ${body.email}`);
-    return await this.login(body);
+    this.logger.log(`Signing jwt for user ${user.email}`);
+
+    // Don't block the HTTP call with verification email sending, so no await here
+    this.emailVerificationService.sendVerificationEmail(user);
+    return this.jwtService.sign({ id: user.id, email: user.email });
   }
 }
