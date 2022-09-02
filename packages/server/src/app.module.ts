@@ -12,6 +12,17 @@ import { EmailVerificationModule } from './modules/email-verification/email-veri
 
 ConfigModule.forRoot();
 
+// Extended 'User' type of Passportjs
+// TODO: Move somewhere else
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface User {
+      id: number;
+    }
+  }
+}
+
 @Module({
   imports: [
     AuthModule,

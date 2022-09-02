@@ -26,8 +26,6 @@ export class EmailVerificationService {
       expiresIn: `300s`,
       secret: process.env.EMAIL_VERIFICATION_TOKEN_SECRET,
     });
-    this.logger.log(`Email verification token is ${token}`);
-
     const title = 'Email Verification';
     const content = `Please go to following link to verify your email: ${process.env.WEBAPP_URL}/email/verify?token=${token}`;
     await this.communicationService.sendEmail(user.email, title, content);

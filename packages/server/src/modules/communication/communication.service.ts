@@ -6,7 +6,7 @@ export class CommunicationService {
 
   // TODO: connect to email SaaS or SMTP
   async sendEmail(to: string, title: string, content: string) {
-    this.logger.log(`[sendEmail] called to send email ${to}`, {
+    this.logger.log(`sendEmail() called to send email ${to}`, {
       title,
       content,
     });
