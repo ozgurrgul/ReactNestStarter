@@ -2,16 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { ok } from '../../utils/httpUtils';
 import { AuthService } from './auth.service';
 import { LoginInput, RegisterInput } from '@rns/dtos';
-import axios from 'axios';
-
-const checkRecaptcha = async (token: string) => {
-  const captchaResponse = await axios.post(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
-  );
-  if (!captchaResponse.data.success) {
-    throw new Error('RECAPTCHA_FAIL');
-  }
-};
+import { checkRecaptcha } from './auth.utils';
 
 @Controller({
   path: 'auth',
