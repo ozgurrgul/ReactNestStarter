@@ -31,6 +31,7 @@ export const LoginPage: React.FC = () => {
     if (!token) {
       return;
     }
+    captchaRef.current.reset();
     const loginOutput = await login({
       email: formState.email,
       password: formState.password,
