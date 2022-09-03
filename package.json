@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "web:start": "cd packages/webapp && yarn start",
+    "web:build": "cd packages/webapp && yarn build",
+    "web:serve": "cd packages/webapp && yarn serve",
     "server:start": "cd packages/server && yarn start:dev",
     "dto:compile": "cd packages/dtos && yarn compile"
   },
