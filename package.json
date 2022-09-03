@@ -6,6 +6,7 @@
     "web:build": "cd packages/webapp && yarn build",
     "web:serve": "cd packages/webapp && yarn serve",
     "server:start": "cd packages/server && yarn start:dev",
+    "server:start:prod": "cd packages/server && yarn build && yarn start:prod",
     "dto:compile": "cd packages/dtos && yarn compile"
   },
   "devDependencies": {
