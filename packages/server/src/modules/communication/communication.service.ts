@@ -4,7 +4,10 @@ import { Injectable, Logger } from '@nestjs/common';
 export class CommunicationService {
   private readonly logger = new Logger(CommunicationService.name);
 
-  // TODO: connect to email SaaS or SMTP
+  /**
+   * Connect to your favorite email provider or a direct SMTP
+   * Send the email
+   */
   async sendEmail(to: string, title: string, content: string) {
     this.logger.log(`sendEmail() called to send email ${to}`, {
       title,

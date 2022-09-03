@@ -1,6 +1,6 @@
 # ReactNestStarter
 
-*Scroll down for images*
+_Scroll down for images_
 
 This starter includes a ReactJS application with Nest backend. Features:
 
@@ -9,8 +9,10 @@ This starter includes a ReactJS application with Nest backend. Features:
 - Full Typescript ⭐
 - Lerna monorepo ⭐
 - Antd / RTK Query libraries used ⭐
+- Email verification api and pages
 
 #### A React js application for frontend
+
 - React-router integrated
 - Login/register user flows added
 - Base layout, logged in layout logics added
@@ -20,6 +22,7 @@ This starter includes a ReactJS application with Nest backend. Features:
 - Directory: - packages/webapp
 
 #### A Nest js application for backend
+
 - [Nestjs](https://nestjs.com/) for server used
 - [Prisma](https://www.prisma.io/) for ORM used
 - Sqlite for database used
@@ -61,7 +64,7 @@ Server runs on http://127.0.0.1:3002 by default
 yarn dto:compile
 ```
 
-*Execute all commands from the main directory*
+_Execute all commands from the main directory_
 
 ### Environment
 
@@ -87,7 +90,6 @@ VITE_RECAPTCHA_SITE_KEY=
 ```
 DATABASE_URL="file:./dev.db"
 ```
-
 
 ### Images
 
