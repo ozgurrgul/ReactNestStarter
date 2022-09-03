@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useVerifyEmailMutation } from "../../services/api";
 import { message, Spin } from "antd";
+import { useFeatures } from "../../hooks/useFeatures";
 
 export const VerifyPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [verify, { isLoading }] = useVerifyEmailMutation();
   const token = searchParams.get("token");
+  const { isFeatureEnabled } = useFeatures();
 
   useEffect(() => {
     if (token) {
@@ -21,6 +23,10 @@ export const VerifyPage: React.FC = () => {
         });
     }
   }, [token]);
+
+  if (!isFeatureEnabled("emailVerification")) {
+    return null;
+  }
 
   if (isLoading) {
     return (

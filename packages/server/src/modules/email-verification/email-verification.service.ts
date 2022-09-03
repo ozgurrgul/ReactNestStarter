@@ -5,6 +5,10 @@ import { VerifyTokenInput } from '@rns/dtos';
 import { CommunicationService } from '../communication/communication.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
+import { FeaturesService } from '../features/features.service';
+import { EmailVerificationFeature } from '../features/types';
+
+type TokenPayload = { userId: number };
 
 @Injectable()
 export class EmailVerificationService {
@@ -15,16 +19,21 @@ export class EmailVerificationService {
     private communicationService: CommunicationService,
     private jwtService: JwtService,
     private userService: UserService,
+    private featuresService: FeaturesService,
   ) {}
 
   async sendVerificationEmail(user: User) {
     this.logger.log(
       `Started send verification email process for user ${user.email}`,
     );
-    const payload = { userId: user.id };
+    const payload: TokenPayload = { userId: user.id };
     const token = this.jwtService.sign(payload, {
       expiresIn: `300s`,
-      secret: process.env.EMAIL_VERIFICATION_TOKEN_SECRET,
+      secret: (
+        this.featuresService.getFeature(
+          'emailVerification',
+        ) as EmailVerificationFeature
+      ).privateConfig.tokenSecret,
     });
     const title = 'Email Verification';
     const content = `Please go to following link to verify your email: ${process.env.WEBAPP_URL}/email/verify?token=${token}`;
@@ -33,8 +42,14 @@ export class EmailVerificationService {
 
   async resendVerificationEmail(userId: number) {
     const user = await this.userService.findUser({ id: userId });
+    if (!user) {
+      this.logger.log(`User ${userId} not found`);
+      throw new Error('USER_NOT_FOUND');
+    }
     if (user.emailVerified) {
-      this.logger.log(`User is already verified, not sending verify email`);
+      this.logger.log(
+        `User ${userId} is already verified, not sending verify email`,
+      );
       return;
     }
     await this.sendVerificationEmail(user);
@@ -43,9 +58,19 @@ export class EmailVerificationService {
   async verifyToken(body: VerifyTokenInput) {
     const { token } = body;
     this.logger.log(`Started verifying email for token ${token}`);
-    const payload = await this.jwtService.verify(token, {
-      secret: process.env.EMAIL_VERIFICATION_TOKEN_SECRET,
-    });
+    let payload: TokenPayload;
+    try {
+      payload = await this.jwtService.verify(token, {
+        secret: (
+          this.featuresService.getFeature(
+            'emailVerification',
+          ) as EmailVerificationFeature
+        ).privateConfig.tokenSecret,
+      });
+    } catch (err) {
+      this.logger.log('Token verifying failed ' + err);
+      throw new Error('USER_EMAIL_VERIFICATION_TOKEN_VERIFY_FAILED');
+    }
 
     if (!payload) {
       throw new Error('USER_EMAIL_VERIFICATION_TOKEN_NOT_VALID');

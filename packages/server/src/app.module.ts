@@ -9,6 +9,7 @@ import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { CommunicationModule } from './modules/communication/communication.module';
 import { EmailVerificationModule } from './modules/email-verification/email-verification.module';
+import { FeaturesModule } from './modules/features/features.module';
 
 ConfigModule.forRoot();
 
@@ -27,6 +28,7 @@ declare global {
   imports: [
     AuthModule,
     UserModule,
+    FeaturesModule,
     CommunicationModule,
     EmailVerificationModule,
   ],

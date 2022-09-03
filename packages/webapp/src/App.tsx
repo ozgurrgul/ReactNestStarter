@@ -9,6 +9,7 @@ import { HomePage } from "./pages/HomePage";
 import { TestPage } from "./pages/TestPage";
 import { LoggedInLayout } from "./layout/LoggedInLayout";
 import { VerifyPage } from "./pages/email/VerifyPage";
+import { useFeatures } from "./hooks/useFeatures";
 
 const auth = (component: React.ReactElement) => (
   <RequireAuth>
@@ -21,6 +22,7 @@ const anon = (component: React.ReactElement) => (
 );
 
 export default function App() {
+  useFeatures();
   return (
     <Routes>
       <Route element={<BaseLayout />}>

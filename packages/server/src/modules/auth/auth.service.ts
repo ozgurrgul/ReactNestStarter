@@ -4,6 +4,7 @@ import { UserService } from 'src/modules/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { LoginInput, RegisterInput } from '@rns/dtos';
 import { EmailVerificationService } from '../email-verification/email-verification.service';
+import { FeaturesService } from '../features/features.service';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,7 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
     private emailVerificationService: EmailVerificationService,
+    private featuresService: FeaturesService,
   ) {}
 
   async login(body: LoginInput) {
@@ -46,8 +48,11 @@ export class AuthService {
     this.logger.log(`User registered successfully ${body.email}`);
     this.logger.log(`Signing jwt for user ${user.email}`);
 
-    // Don't block the HTTP call with verification email sending, so no await here
-    this.emailVerificationService.sendVerificationEmail(user);
+    if (this.featuresService.getFeature('emailVerification').enabled) {
+      // Don't block the HTTP call with verification email sending, so no await here
+      this.emailVerificationService.sendVerificationEmail(user);
+    }
+
     return this.jwtService.sign({ id: user.id, email: user.email });
   }
 }

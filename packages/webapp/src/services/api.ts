@@ -5,6 +5,7 @@ import { emailEndpoints } from "./endpoints/emailEndpoints";
 import { API_URL } from "../constants";
 import { selectAuthToken } from "../slices/authSlice";
 import { userEndpoints } from "./endpoints/userEndpoints";
+import { featuresEndpoints } from "./endpoints/featuresEndpoints";
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
@@ -26,6 +27,7 @@ export const api = createApi({
     ...authEndpoints(builder),
     ...userEndpoints(builder),
     ...emailEndpoints(builder),
+    ...featuresEndpoints(builder),
   }),
 });
 
@@ -35,4 +37,5 @@ export const {
   useGetMeQuery,
   useVerifyEmailMutation,
   useResendVerificationMutation,
+  useListFeaturesQuery,
 } = api;

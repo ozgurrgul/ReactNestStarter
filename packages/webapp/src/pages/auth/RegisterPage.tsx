@@ -13,11 +13,13 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 import { LoginFormPage, ProFormText } from "@ant-design/pro-components";
+import { useFeatures } from "../../hooks/useFeatures";
 
 export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const captchaRef = useRef<ReCaptcha>(null);
+  const { isFeatureEnabled } = useFeatures();
 
   const [register, { isLoading, error }] = useRegisterMutation();
 
@@ -100,6 +102,11 @@ export const RegisterPage: React.FC = () => {
               message: "Required",
             },
           ]}
+          extra={
+            isFeatureEnabled("emailVerification")
+              ? "Check your inbox after registering to verify your email"
+              : undefined
+          }
         />
         <ProFormText.Password
           name="password"
